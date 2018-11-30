@@ -1,0 +1,27 @@
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="br.com.mobapps.features.exportpdf">
+
+    <dist:module
+        dist:onDemand="true"
+        dist:title="@string/title_exportpdf">
+        <dist:fusing
+            dist:include="true" />
+    </dist:module>
+
+    <application
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup">
+        <activity
+            android:name="br.com.mobapps.features.exportpdf.ExportActivity">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+
