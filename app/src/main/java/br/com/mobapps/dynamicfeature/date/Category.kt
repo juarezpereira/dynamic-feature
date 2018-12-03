@@ -1,9 +1,4 @@
-package br.com.mobapps.dynamicfeature
-
-data class Bill(
-        val description: String,
-        val value: Double,
-        val category: Category)
+package br.com.mobapps.dynamicfeature.date
 
 sealed class Category {
     object Food: Category()

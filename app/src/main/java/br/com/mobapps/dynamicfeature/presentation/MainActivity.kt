@@ -1,4 +1,4 @@
-package br.com.mobapps.dynamicfeature
+package br.com.mobapps.dynamicfeature.presentation
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,11 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import br.com.mobapps.dynamicfeature.*
+import br.com.mobapps.dynamicfeature.core.Constant
+import br.com.mobapps.dynamicfeature.date.Bill
+import br.com.mobapps.dynamicfeature.date.Category
+import br.com.mobapps.dynamicfeature.presentation.bill.adapter.BillsAdapter
 import com.google.android.play.core.splitinstall.SplitInstallManager
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
@@ -17,10 +22,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var manager: SplitInstallManager
-    private lateinit var billsAdapter: BillsAdapter
-    private lateinit var bills: MutableList<Bill>
 
-    private val moduleExportPDF by lazy { getString(R.string.title_export_report) }
+    private val moduleExportPDF by lazy { getString(R.string.title_exportpdf) }
 
     private var dialogProgress: AlertDialog? = null
 
@@ -29,23 +32,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         manager = SplitInstallManagerFactory.create(this)
-
-        bills = MutableList(20) {
-            val category = when (it) {
-                0, 1, 2, 14 -> Category.Food
-                3, 4, 5, 12, 13 -> Category.Health
-                6, 7, 8, 9, 10, 11-> Category.Clothing
-                else -> Category.Recreation
-            }
-
-            Bill(description = "Description $it", value = it * 10.0, category = category)
-        }
-
-        billsAdapter = BillsAdapter(bills)
-
-        rvBills.layoutManager = LinearLayoutManager(this)
-        rvBills.adapter = billsAdapter
-        rvBills.setHasFixedSize(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -74,10 +60,6 @@ class MainActivity : AppCompatActivity() {
         loadAndLaunchModule(moduleExportPDF)
     }
 
-    /**
-     * Load a feature by module name.
-     * @param name The name of the feature module to load.
-     */
     private fun loadAndLaunchModule(name: String) {
         updateProgressMessage("Loading module $name")
 

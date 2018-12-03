@@ -1,4 +1,4 @@
-package br.com.mobapps.dynamicfeature
+package br.com.mobapps.dynamicfeature.core
 
 object Constant {
 

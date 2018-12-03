@@ -1,10 +1,12 @@
-package br.com.mobapps.dynamicfeature
+package br.com.mobapps.dynamicfeature.presentation.bill.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import br.com.mobapps.dynamicfeature.R
+import br.com.mobapps.dynamicfeature.date.Bill
 import kotlinx.android.synthetic.main.recycler_item_bill.view.*
 import java.text.NumberFormat
 
